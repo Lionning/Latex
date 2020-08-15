@@ -1,0 +1,150 @@
+\documentclass[10pt]{article}
+\usepackage{natbib}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+
+
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+
+
+\parindent=0.0cm
+\parskip=\medskipamount
+\textwidth 15cm
+\textheight 22cm
+\topmargin -1cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+
+%%%% Commandes
+\newcommand{\mcU}{\mathcal{U}}
+\newcommand{\bX}{\mathbf{X}}
+
+
+\begin{document}
+\begin{figure}[!ht]
+\begin{center}
+\begin{tikzpicture}
+%%% Noeuds
+\node[draw,text width=1.5cm,text centered] (Nmusig) at (0,0) {Normal $\mathcal{N}(\mu,\sigma^2)$};
+\node[draw] (LogNorm) at (-4,0) {Lognormal};
+\node[draw,text width=1.5cm,text centered] (Normal) at (-2,-3) {Normal $\mathcal{N}(0,1)$};
+\node[draw,text width=1.5cm,text centered] (Gamma) at (4,-3) {Gamma $\Gamma(\alpha,\beta)$};
+\node[draw,text width=1.5cm,text centered] (Beta) at (5.5,0) {Beta $\mathcal{B}e(\alpha,\beta)$};
+\node[draw,text width=1.5cm,text centered] (Binomial) at (4,3) {Binomial $\mathcal{B}in(n,p)$};
+\node[draw,text width=1.5cm,text centered] (Poisson) at (0,3) {Poisson $\mathcal{P}(\lambda)$};
+\node[draw,text width=1.5cm,text centered] (Cauchy) at (-4,-6) {Cauchy $\mathcal{C}au(\mu,a)$};
+\node[draw,text width=1.5cm,text centered] (Chideux) at (0,-6) {Chi$^2$ $\chi(d)$};
+\node[draw,text width=2cm,text centered] (InvGamma) at (3.1,-6) {Inverse Gamma $\mathcal{I}nv\Gamma(\alpha,\beta)$};
+\node[draw,text width=1.5cm,text centered] (Uniform) at (8,-5) {Uniforme $\mcU([0,1])$};
+\node[draw,text width=1.5cm,text centered] (Student) at (-3.5,-9) {Student $\mathcal{T}(d)$};
+\node[draw,text width=1.5cm,text centered] (Fisher) at (-0.5,-9) {Fisher $\mathcal{F}(d_1,d_2)$};
+\node[draw,text width=2cm,text centered] (Exponentiel) at (5,-9) {Exponentielle $\mathcal{E}(\lambda)$};
+\node[draw,text width=1.5cm,text centered] (Weibull) at (3,-12) {Weibull $\mathcal{W}(k,\lambda)$};
+\node[draw,text width=2cm,text centered] (Laplace) at (-0.5,-10.5) {Laplace$(\mu,b)$};
+\node[draw,text width=2.25cm,text centered] (Gumbel) at (8,-12) {Gumbel$(\mu,\beta)$};
+\node[draw,text width=2.3cm,text centered] (Logistique) at (8,-10) {Logistique$(\mu,\beta)$};
+\node[draw,text width=2.3cm,text centered] (Frechet) at (-2,-12) {Fréchet$(\alpha,s,m)$};
+\node[draw,text width=1.5cm,text centered] (Bernoulli) at (8,1) {Bernoulli $\mathcal{B}(p)$};
+\node[draw,text width=1.5cm,text centered] (BetaBinomial) at (8.5,3) {Beta-Binomial $(n,\alpha,\beta)$};
+\node[draw,text width=1.5cm,text centered] (NegBinom) at (-4,3) {Binomial Négative $\mathcal{N}eg(n,p)$};
+\node[draw,text width=2cm,text centered] (Geom) at (-3.5,5.5) {Géométrique $\mathcal{G}(p)$};
+\node[draw,text width=3cm,text centered] (HypGeom) at (4,5.5) {Hypergéométrique $\mathcal{H}(M,N,k)$};
+\node[draw,text width=1.5cm,text centered] (Discret) at (8.5,5.5) {Uniforme discrète};
+
+
+%%% Flèches
+\draw[->,>=latex] (Nmusig.220) to[bend right=15] (Nmusig.320);
+\draw (Nmusig.south) node[below]{$\sum X_k$};
+%% Normal(0,1)
+%% Lognormal
+\draw[->,>=latex] (Nmusig.170) -- (LogNorm.10) node[midway,above]{$e^X$};
+\draw[->,>=latex] (LogNorm.350) -- (Nmusig.190) node[midway,below]{$\ln(X)$};
+\draw[->,>=latex] (LogNorm.30) to[bend right=15] (LogNorm.150);
+\draw (LogNorm.north) node[above]{$\prod X_k$};
+%% Normal(0,1)
+\draw[->,>=latex] (Nmusig.200) -- (Normal.55) node[midway,left]{$\frac{X-\mu}{\sigma}$};
+\draw[->,>=latex] (Normal.40) -- (Nmusig.215) node[pos=0.25,right]{$\sigma X+\mu$};
+\draw[->,>=latex] (Normal.225) -- (Cauchy.35) node[midway,left]{$\frac{X_1}{X_2}$};
+\draw[->,>=latex] (Normal.315) -- (Chideux.165) node[pos=0.25,right]{$\sum X_k^2$};
+%% Cauchy
+\draw[->,>=latex] (Cauchy.45) to[bend right=15] (Cauchy.130);
+\draw (Cauchy.north) node[above]{$\sum X_k$};
+\draw[->,>=latex] (Cauchy.160) to[bend right=25] (Cauchy.200);
+\draw (Cauchy.west) node[left]{$\frac{1}{X}$};
+%% Student
+\draw[->,>=latex,dashed] (Student.110) -- (Cauchy.south) node[midway,left]{$d=1$};
+\draw[->,>=latex] (Student.east) -- (Fisher.west) node[midway,above]{$X^2$};
+\draw[->,>=latex,dotted] (Student.70) -- (Normal.south) node[midway,right]{$\nu\to\!+\infty$};
+%% Fisher
+\draw[->,>=latex] (Chideux.245) -- (Fisher.105) node[midway,left]{$\frac{X_1/d_1}{X_2/d_2}$};
+\draw[->,>=latex,dotted] (Fisher.75) -- (Chideux.285) node[pos=0.525,right]{$d_1X$} node[pos=0.275,right]{$d_2\to+\infty$};
+\draw[->,>=latex] (Fisher.340) to[bend right=25] (Fisher.20);
+\draw (Fisher.east) node[right]{$\frac{1}{X}$};
+%% Chi2
+\draw[->,>=latex,dashed] (Chideux.330) -- (Exponentiel.195) node[pos=0.75,left]{$d=2$};
+\draw[->,>=latex,dashed] (Exponentiel.west) -- (Chideux.south east) node[pos=0.4,right]{$\lambda=1/2$};
+\draw[->,>=latex] (Chideux.45) to[bend right=15] (Chideux.130);
+\draw (Chideux.north) node[above]{$\sum X_k$};
+\draw[->,>=latex,dashed] (Gamma.south west) -- (Chideux.north east) node[pos=0.3,left]{$\alpha=d/2$} node[pos=0.54,left]{$\beta=1/2$};
+%% Gamma
+\draw[->,>=latex,dotted] (Gamma.north west) -- (Nmusig.south east) node[pos=0.75,right]{$\mu=\alpha/\beta$} node[pos=0.5,right]{$\sigma=\alpha/\beta^2$} node[pos=0.25,right]{$\alpha\to\infty$};
+\draw[<->,>=latex] (Gamma.south) -- (InvGamma.north) node[pos=0.5,left]{$\frac{1}{X}$};
+\draw[->,>=latex,dashed] (Gamma.302) -- (Exponentiel.north) node[pos=0.725,left]{$\alpha=1$};
+\draw[<-,>=latex] (Gamma.315) -- (Exponentiel.70) node[pos=0.25,right]{$\sum X_k$};
+\draw[->,>=latex] (Gamma.70) -- (Beta.210) node[pos=0.4,right]{$\frac{X_1}{X_1+X_2}$};
+%% Expo
+\draw[<-,>=latex] (Exponentiel.30) -- (Uniform.220) node[pos=0.25,right]{$-\lambda \ln X$};
+\draw[->,>=latex] (Exponentiel.45) -- (Uniform.200) node[pos=0.75,left]{$e^{-\lambda X}$};
+\draw[->,>=latex] (Exponentiel.south west) -- (Laplace.5) node[pos=0.25,above left]{$X_1-X_2$};
+\draw[<-,>=latex] (Exponentiel.220) -- (Laplace.355) node[pos=0.5,below]{$|X|$};
+\draw[->,>=latex] (Exponentiel.south) -- (Weibull.north) node[pos=0.5,left]{$X^k$};
+\draw[<-,>=latex,dashed] (Exponentiel.290) -- (Weibull.70) node[pos=0.5,right]{$k=1$};
+\draw[->,>=latex] (Exponentiel.345) to[bend right=20] (Exponentiel.15);
+\draw (Exponentiel.east) node[right]{$\min X_k$};
+%% Weibull
+\draw[->,>=latex] (Weibull.west) -- (Frechet.east) node[pos=0.5,above]{$\frac{\lambda^2}{X}$};
+\draw[->,>=latex] (Weibull.5) -- (Gumbel.177) node[pos=0.5,above]{$\ln X$};
+\draw[<-,>=latex] (Weibull.355) -- (Gumbel.183) node[pos=0.5,below]{$e^{X}$};
+%% Gumbel
+\draw[->,>=latex] (Gumbel.north) -- (Logistique.south) node[pos=0.7,right]{$X_1+X_2$} node[pos=0.3,right]{$X_1-X_2$};
+%% Uniform
+\draw[->,>=latex] (Uniform.south) -- (Logistique.north) node[pos=0.5,above,rotate=270]{$\mu+\beta\left[\ln X+\ln (1-X)\right]$};
+\draw[<-,>=latex,dashed] (Uniform.north) -- (Beta.south) node[pos=0.5,right]{$\alpha=\beta=1$};
+%% Beta
+\draw[->,>=latex,dotted] (Beta.west) -- (Nmusig.east) node[pos=0.5,above]{$\alpha=\beta\to+\infty$};
+%% Binomial
+\draw[->,>=latex,dotted] (Binomial.south west) -- (Nmusig.north east) node[pos=0.25,right]{$\mu=np$} node[pos=0.5,right]{$\sigma=np(1-p)$} node[pos=0.75,right]{$n\to+\infty$};
+\draw[->,>=latex,dashed] (Binomial.south east) -- (Bernoulli.west) node[pos=0.5,below left]{$n=1$};
+\draw[<-,>=latex] (Binomial.340) -- (Bernoulli.170) node[pos=0.75,above right]{$\sum X_k$};
+\draw[->,>=latex,dotted] (Binomial.west) -- (Poisson.east) node[pos=0.5,above]{$\lambda=np$} node[pos=0.5,below]{$n\to+\infty$};
+\draw[<-,>=latex,dotted] (Binomial.east) -- (BetaBinomial.west) node[pos=0.5,above]{$p=\frac{\alpha}{\alpha+\beta}$} node[pos=0.5,below]{$\alpha+\beta\to+\infty$};
+\draw[<-,>=latex,dotted] (Binomial.north) -- (HypGeom.south) node[pos=0.7,left]{$p=M/N,n=K$} node[pos=0.3,left]{$N\to+\infty$};
+%% Beta-Binomial
+\draw[->,>=latex,dashed] (BetaBinomial.north) -- (Discret.south) node[pos=0.5,left]{$\alpha=\beta=1$};
+%% Poisson
+\draw[->,>=latex,dotted] (Poisson.south) -- (Nmusig.north) node[pos=0.25,left]{$\mu=\lambda$} node[pos=0.5,left]{$\sigma=\lambda$} node[pos=0.75,left]{$\lambda\to+\infty$};
+\draw[<-,>=latex,dotted] (Poisson.west) -- (NegBinom.east) node[pos=0.5,above]{$\lambda=n(1-p)$} node[pos=0.5,below]{$n\to+\infty$};
+\draw[->,>=latex] (Poisson.40) to[bend right=15] (Poisson.130);
+\draw (Poisson.north) node[above]{$\sum X_k$};
+%% Geometrique
+\draw[->,>=latex] (Geom.260) -- (NegBinom.100) node[pos=0.5,left]{$\sum X_k$};
+\draw[<-,>=latex,dashed] (Geom.280) -- (NegBinom.80) node[pos=0.5,right]{$n=1$};
+\draw[->,>=latex] (Geom.345) to[bend right=15] (Geom.15);
+\draw (Geom.east) node[right]{$\min X_k$};
+
+
+\end{tikzpicture}
+\caption{\label{Fig:GrapheLoi}Graphe de liens entre différentes lois~: les flèches en traits pleins représentent une transformation de la loi du vecteur $\bX$ (début de la flèche) vers la variable $Y=f(\bX)$ (bout de la flèche), les flèches en pointillés longs indiquent un cas particulier et les flèches en pointillés courts un cas limite ou une approximation. Ce graphe est adapté du travail de \cite{leemis1986relationships}.}
+\end{center}
+\end{figure}
+
+\bibliographystyle{abbrvnatfrench}
+
+\bibliography{Biblio}
+\end{document}
